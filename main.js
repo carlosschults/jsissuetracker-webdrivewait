@@ -41,15 +41,21 @@ function issuesList() {
         [];
 }
 
-function fetchIssues(){
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchIssues(){
+	const issuesList = document.getElementById('issuesList');
+	issuesList.innerHTML = "<img src='img/loading.gif' />";
+	await sleep(3000);
     const issues = this.issuesList();
-    const issuesList = document.getElementById('issuesList');
     let issueListHtml = '';
 
     if (issues) {
         issues.forEach(element => issueListHtml += createIssueTemplate(element));
     }
-
+	
     issuesList.innerHTML = issueListHtml;    
 }
 
